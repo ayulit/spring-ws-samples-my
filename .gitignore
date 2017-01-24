@@ -13,3 +13,11 @@ atlassian-ide-plugin*.xml
 /*/*/build
 /*/*/*/build
 .gradle
+
+# Eclipse - ignore all this in subfolers (used ** wildcard)
+**/.classpath
+**/.project
+**/.settings
+
+# Ignore all .gitignore in subfolders except root!
+/**/.gitignore

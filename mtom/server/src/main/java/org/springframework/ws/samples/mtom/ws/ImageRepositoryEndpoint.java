@@ -49,6 +49,8 @@ public class ImageRepositoryEndpoint {
         imageRepository.storeImage(request.getName(), request.getImage());
     }
 
+    
+	// xlitand: method for object creation (from XML?!)
     @PayloadRoot(localPart = "LoadImageRequest", namespace = "http://www.springframework.org/spring-ws/samples/mtom")
     @ResponsePayload
     public JAXBElement<Image> load(@RequestPayload JAXBElement<String> requestElement) throws IOException {

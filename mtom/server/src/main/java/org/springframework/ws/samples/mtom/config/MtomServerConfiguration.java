@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.ws.config.annotation.EnableWs;
@@ -24,6 +25,7 @@ import org.springframework.xml.xsd.SimpleXsdSchema;
  */
 @EnableWs
 @Configuration
+@EnableAspectJAutoProxy
 public class MtomServerConfiguration extends WsConfigurationSupport {
 
 	@Bean

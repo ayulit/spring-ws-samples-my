@@ -1,0 +1,33 @@
+spring-ws client's methods call consequence
+
+BEFORE : ImageRepositoryEndpoint store - ?Saaj
+BEFORE : StubImageRepository storeImage - Saaj
+AFTER : StubImageRepository storeImage - Saaj
+AFTER : ImageRepositoryEndpoint store - ?Saaj
+
+BEFORE : ImageRepositoryEndpoint load - ?Saaj
+BEFORE : StubImageRepository readImage - Saaj
+AFTER : StubImageRepository readImage - Saaj
+AFTER : ImageRepositoryEndpoint load - ?Saaj
+
+BEFORE : ImageRepositoryEndpoint store - ?Axiom
+BEFORE : StubImageRepository storeImage - Axiom
+AFTER : StubImageRepository storeImage - Axiom
+AFTER : ImageRepositoryEndpoint store - ?Axiom
+
+BEFORE : ImageRepositoryEndpoint load - ?Axiom
+BEFORE : StubImageRepository readImage - Axiom
+AFTER : StubImageRepository readImage - Axiom
+AFTER : ImageRepositoryEndpoint load - ?Axiom
+
+jax-ws client's methods call consequence
+
+BEFORE : ImageRepositoryEndpoint store
+BEFORE : StubImageRepository storeImage
+AFTER : StubImageRepository storeImage
+AFTER : ImageRepositoryEndpoint store
+
+BEFORE : ImageRepositoryEndpoint load
+BEFORE : StubImageRepository readImage
+AFTER : StubImageRepository readImage
+AFTER : ImageRepositoryEndpoint load

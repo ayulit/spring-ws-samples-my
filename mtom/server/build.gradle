@@ -74,8 +74,9 @@ dependencies {
 	
 	
 	compile(files(genJaxb.classesDir).builtBy(genJaxb))
-
-	runtime("log4j:log4j:1.2.16")
+	
+    // xlitand: 'org.apache.log4j.Logger' needs 'compile' in some reason... 
+	compile("log4j:log4j:1.2.16")
     runtime("wsdl4j:wsdl4j:1.6.1")
 
 	jaxb "com.sun.xml.bind:jaxb-xjc:2.1.7"	

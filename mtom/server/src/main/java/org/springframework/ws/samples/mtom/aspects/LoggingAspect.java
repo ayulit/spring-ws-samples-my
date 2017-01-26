@@ -1,7 +1,7 @@
 package org.springframework.ws.samples.mtom.aspects;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -11,25 +11,17 @@ import org.aspectj.lang.annotation.Pointcut;
 @Aspect
 public class LoggingAspect {
 	
-	private static final Log logger = LogFactory.getLog(LoggingAspect.class);
+	private static final Logger LOG = Logger.getLogger(LoggingAspect.class);
 	
-	@Pointcut("within(org.springframework.ws.samples.mtom.service.*) ||"
-			+ "within(org.springframework.ws.samples.mtom.ws.*)")
-	public void insideAllClasses() {}
+	@Pointcut("within(org.springframework.ws.samples.mtom.service.*)")
+	public void insideService() {}
 	
 	
-	@Before("insideAllClasses()")
+	@Before("insideService()")
     public void before(JoinPoint joinPoint) {
     	
 		// xlitand: that's just aspect's code
-		logger.info("BEFORE : " + 
-				joinPoint.getTarget().getClass().getSimpleName() + 
-				" " +
-				joinPoint.getSignature().getName()
-				);
-		
-		// xlitand: TODO: delete
-		System.out.println("BEFORE : " + 
+		LOG.info("BEFORE : " + 
 				joinPoint.getTarget().getClass().getSimpleName() + 
 				" " +
 				joinPoint.getSignature().getName()
@@ -37,17 +29,10 @@ public class LoggingAspect {
 		
     }
     
-	@AfterReturning("insideAllClasses()")
+	@AfterReturning("insideService()")
     public void afterReturning(JoinPoint joinPoint) {
     			
-		logger.info("AFTER : " + 
-				joinPoint.getTarget().getClass().getSimpleName() + 
-				" " +
-				joinPoint.getSignature().getName()
-				);
-		
-		// xlitand: TODO: delete
-		System.out.println("AFTER : " + 
+		LOG.info("AFTER : " + 
 				joinPoint.getTarget().getClass().getSimpleName() + 
 				" " +
 				joinPoint.getSignature().getName()

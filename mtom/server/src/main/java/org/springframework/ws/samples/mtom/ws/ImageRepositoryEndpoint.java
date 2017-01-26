@@ -17,6 +17,10 @@
 package org.springframework.ws.samples.mtom.ws;
 
 import java.io.IOException;
+import java.lang.ref.SoftReference;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.xml.bind.JAXBElement;
 
 import org.springframework.util.Assert;
@@ -34,18 +38,29 @@ public class ImageRepositoryEndpoint {
 
     private ImageRepository imageRepository;
 
-    private ObjectFactory objectFactory;
+    private ObjectFactory objectFactory; // xlitand: needed for marshaling ?!
 
+    // xlitand: HashMap for caching
+    public static Map<String, SoftReference<java.awt.Image>> imagesCache = new HashMap<String, SoftReference<java.awt.Image>>();
+    
+    // xlitand: this constructor called from somewhere with 'imageRepository'
     public ImageRepositoryEndpoint(ImageRepository imageRepository) {
         Assert.notNull(imageRepository, "'imageRepository' must not be null");
+        
+        // xlitand: class parameters initialization
         this.imageRepository = imageRepository;
         this.objectFactory = new ObjectFactory();
     }
-
+    
+    // xlitand: this is Store Image Request from the client, I suppose
+    // xlitand: request comes as XML and it contains an image
+    // xlitand: annotations for marshaling ?!
     @PayloadRoot(localPart = "StoreImageRequest", namespace = "http://www.springframework.org/spring-ws/samples/mtom")
     @ResponsePayload
     public void store(@RequestPayload JAXBElement<Image> requestElement) throws IOException {
-        Image request = requestElement.getValue();
+        Image request = requestElement.getValue(); // xlitand: getting image from XML ?!
+        
+        // xlitand: storing image in repository
         imageRepository.storeImage(request.getName(), request.getImage());
     }
 

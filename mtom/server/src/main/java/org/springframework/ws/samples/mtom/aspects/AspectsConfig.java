@@ -11,4 +11,9 @@ public class AspectsConfig {
 		return new LoggingAspect();
 	}
 	
+	@Bean
+	public CachingAspect cachingAspect() {
+		return new CachingAspect();
+	}
+	
 }

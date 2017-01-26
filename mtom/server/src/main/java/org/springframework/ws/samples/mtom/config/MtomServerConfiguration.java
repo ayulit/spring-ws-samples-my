@@ -3,6 +3,9 @@ package org.springframework.ws.samples.mtom.config;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -12,6 +15,7 @@ import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurationSupport;
 import org.springframework.ws.samples.mtom.service.ImageRepository;
 import org.springframework.ws.samples.mtom.service.StubImageRepository;
+import org.springframework.ws.samples.mtom.service.XmlImageRepository;
 import org.springframework.ws.samples.mtom.ws.ImageRepositoryEndpoint;
 import org.springframework.ws.server.endpoint.adapter.DefaultMethodEndpointAdapter;
 import org.springframework.ws.server.endpoint.adapter.method.MarshallingPayloadMethodProcessor;
@@ -30,7 +34,8 @@ public class MtomServerConfiguration extends WsConfigurationSupport {
 
 	@Bean
 	public ImageRepository imageRepository() {
-		return new StubImageRepository();
+		/*return new StubImageRepository();*/
+		return new XmlImageRepository();
 	}
 
 	@Bean
@@ -81,6 +86,12 @@ public class MtomServerConfiguration extends WsConfigurationSupport {
 	@Bean
 	public SimpleXsdSchema schema() {
 		return new SimpleXsdSchema(new ClassPathResource("/schema.xsd"));
+	}
+	
+	// xlitand: bean for JAXBContext with class which we wanna serialize (as root element)
+	@Bean
+	public JAXBContext context() throws JAXBException {
+		return JAXBContext.newInstance(ImageXML.class);	
 	}
 
 }

@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
 
 import org.springframework.util.Assert;
 import org.springframework.ws.samples.mtom.schema.Image;
@@ -57,7 +58,7 @@ public class ImageRepositoryEndpoint {
     // xlitand: annotations for marshaling ?!
     @PayloadRoot(localPart = "StoreImageRequest", namespace = "http://www.springframework.org/spring-ws/samples/mtom")
     @ResponsePayload
-    public void store(@RequestPayload JAXBElement<Image> requestElement) throws IOException {
+    public void store(@RequestPayload JAXBElement<Image> requestElement) throws IOException, JAXBException {
         Image request = requestElement.getValue(); // xlitand: getting image from XML ?!
         
         // xlitand: storing image in repository
@@ -68,7 +69,7 @@ public class ImageRepositoryEndpoint {
 	// xlitand: method for object creation (from XML?!)
     @PayloadRoot(localPart = "LoadImageRequest", namespace = "http://www.springframework.org/spring-ws/samples/mtom")
     @ResponsePayload
-    public JAXBElement<Image> load(@RequestPayload JAXBElement<String> requestElement) throws IOException {
+    public JAXBElement<Image> load(@RequestPayload JAXBElement<String> requestElement) throws IOException, JAXBException {
         String name = requestElement.getValue();
         Image response = new Image();
         response.setName(name);

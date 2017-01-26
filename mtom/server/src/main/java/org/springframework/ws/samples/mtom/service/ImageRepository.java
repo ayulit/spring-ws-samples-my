@@ -19,11 +19,13 @@ package org.springframework.ws.samples.mtom.service;
 import java.awt.Image;
 import java.io.IOException;
 
+import javax.xml.bind.JAXBException;
+
 /** @author Arjen Poutsma */
 public interface ImageRepository {
 
-    Image readImage(String name) throws IOException;
+    Image readImage(String name) throws IOException, JAXBException;
 
-    void storeImage(String name, Image image) throws IOException;
+    void storeImage(String name, Image image) throws IOException, JAXBException;
 
 }

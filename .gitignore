@@ -21,3 +21,5 @@ atlassian-ide-plugin*.xml
 
 # Ignore all .gitignore in subfolders except root!
 /**/.gitignore
+
+!/mtom/server/.gitignore

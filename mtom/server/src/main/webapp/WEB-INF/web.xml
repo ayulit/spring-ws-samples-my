@@ -11,7 +11,7 @@
         </init-param>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>org.springframework.ws.samples.mtom.config.MtomServerConfiguration, org.springframework.ws.samples.mtom.aspects.AspectsConfig</param-value>
+            <param-value>org.springframework.ws.samples.mtom.config.MtomServerConfiguration, org.springframework.ws.samples.mtom.aspects.AspectsConfig, org.springframework.ws.samples.mtom.config.DbConfig</param-value>
         </init-param>
     </servlet>
 

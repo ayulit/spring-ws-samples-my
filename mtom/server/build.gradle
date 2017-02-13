@@ -13,6 +13,7 @@ buildscript {
 }
 
 ext.tomcatVersion =       '7.0.42'
+ext.postgresqlVersion = '9.0-801.jdbc4'
 
 
 apply plugin: 'war'
@@ -71,6 +72,12 @@ dependencies {
 	compile("org.aspectj:aspectjrt:1.8.10")
 	compile("org.aspectj:aspectjweaver:1.8.10")
 	compile("org.springframework:spring-aspects:$springVersion")
+	
+	// xlitand: PostgreSQL Drivers
+	compile("postgresql:postgresql:$postgresqlVersion")
+	
+	// xlitand: JDBC interaction with database
+	compile("org.springframework:spring-jdbc:$springVersion")
 	
 	
 	compile(files(genJaxb.classesDir).builtBy(genJaxb))

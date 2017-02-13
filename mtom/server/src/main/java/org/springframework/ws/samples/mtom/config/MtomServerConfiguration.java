@@ -13,6 +13,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurationSupport;
+import org.springframework.ws.samples.mtom.service.DbImageRepository;
 import org.springframework.ws.samples.mtom.service.ImageRepository;
 import org.springframework.ws.samples.mtom.service.StubImageRepository;
 import org.springframework.ws.samples.mtom.service.XmlImageRepository;
@@ -34,8 +35,12 @@ public class MtomServerConfiguration extends WsConfigurationSupport {
 
 	@Bean
 	public ImageRepository imageRepository() {
-		/*return new StubImageRepository();*/
-		return new XmlImageRepository();
+		//return new StubImageRepository();
+		//return new XmlImageRepository();
+
+		// xlitand: here we go with DB
+		return new DbImageRepository();
+		
 	}
 
 	@Bean

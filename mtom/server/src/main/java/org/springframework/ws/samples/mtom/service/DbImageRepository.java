@@ -36,7 +36,7 @@ public class DbImageRepository implements ImageRepository {
 
 		try {
 			jdbcTemplate.update("CREATE TABLE t_images (" + 
-		                        "name VARCHAR(50) NOT NULL PRIMARY KEY" + ")");			
+		                        "name VARCHAR(50) NOT NULL" + ")");			
 			LOG.info("Created table t_images");
 		} catch (DataAccessException e) {
 			

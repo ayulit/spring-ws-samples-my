@@ -2,8 +2,10 @@ package org.springframework.ws.samples.mtom.service;
 
 import java.awt.Image;
 import java.awt.image.RenderedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.annotation.PostConstruct;
 import javax.imageio.ImageIO;
@@ -66,14 +68,23 @@ public class DbImageRepository implements ImageRepository {
 	@Override
 	public Image readImage(String name) throws IOException, JAXBException {
 
-		LOG.error("Reading file " + name + " from DB is under construction...");		
-		return null;
+		LOG.info("Reading file " + name + " from DB");		
+		
+		// xlitand: here we will use lambda as RowMapper
+		byte[] imageInByte = jdbcTemplate.queryForObject("SELECT img from t_images WHERE name = ?",
+				new Object[]{name}, (rs, rowNum) -> rs.getBytes("img"));
+						
+		// convert byte array back to Image
+		InputStream in = new ByteArrayInputStream(imageInByte);
+		Image imageFromConvert = ImageIO.read(in);
+		
+		return imageFromConvert;
 	}
 
 	@Override
 	public void storeImage(String name, Image image) throws IOException, JAXBException {
 		
-		/* xlitand: convert BufferedImage to byte array */
+		/* xlitand: convert Image to byte array */
 		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();		
 		ImageIO.write((RenderedImage) image, 
@@ -81,7 +92,7 @@ public class DbImageRepository implements ImageRepository {
 		baos.flush();
 		byte[] imageInByte = baos.toByteArray();
 		
-						
+		/* Saving to DB */		
         jdbcTemplate.update("INSERT INTO t_images (name,img) VALUES (?,?)",
         		name, imageInByte);
         

@@ -59,7 +59,8 @@ public class CachingAspect {
 			
 			LOG.info("AROUND: returning from cache Image " + name);
 			
-			return cashedImage;
+			// xlitand: temporary disabling read from cache to test read from DB
+			//return cashedImage;
 		}
 		
 		return jp.proceed(); // for bean's method run  

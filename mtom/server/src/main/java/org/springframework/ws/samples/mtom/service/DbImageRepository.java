@@ -1,9 +1,12 @@
 package org.springframework.ws.samples.mtom.service;
 
 import java.awt.Image;
+import java.awt.image.RenderedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import javax.annotation.PostConstruct;
+import javax.imageio.ImageIO;
 import javax.xml.bind.JAXBException;
 
 import org.apache.log4j.Logger;
@@ -11,6 +14,7 @@ import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.util.StringUtils;
 
 public class DbImageRepository implements ImageRepository {
 
@@ -36,7 +40,8 @@ public class DbImageRepository implements ImageRepository {
 
 		try {
 			jdbcTemplate.update("CREATE TABLE t_images (" + 
-		                        "name VARCHAR(50) NOT NULL" + ")");			
+		                        "name VARCHAR(50) NOT NULL," + 
+								"img BYTEA" + ")");
 			LOG.info("Created table t_images");
 		} catch (DataAccessException e) {
 			
@@ -67,10 +72,20 @@ public class DbImageRepository implements ImageRepository {
 
 	@Override
 	public void storeImage(String name, Image image) throws IOException, JAXBException {
-				
-		// xlitand: TODO implement inserting image!		
-        jdbcTemplate.update("INSERT INTO t_images (name) VALUES (?)",
-        		name);
+		
+		/* xlitand: convert BufferedImage to byte array */
+		
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();		
+		ImageIO.write((RenderedImage) image, 
+						StringUtils.getFilenameExtension(name), baos);
+		baos.flush();
+		byte[] imageInByte = baos.toByteArray();
+		
+						
+        jdbcTemplate.update("INSERT INTO t_images (name,img) VALUES (?,?)",
+        		name, imageInByte);
+        
+        baos.close();
         
         LOG.info("Stored to DB image " + name + " [" + image.getWidth(null) + "x" + image.getHeight(null) + "]");
 

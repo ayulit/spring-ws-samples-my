@@ -14,6 +14,7 @@ buildscript {
 
 ext.tomcatVersion =       '7.0.42'
 ext.postgresqlVersion = '9.0-801.jdbc4'
+ext.hibernateVersion  = '4.3.11.Final'
 
 
 apply plugin: 'war'
@@ -94,7 +95,15 @@ dependencies {
 	
 	// xlitand: for using ServletContextListener, compileOnly in some reason...
 	compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+
+	// xlitand: Hibernate: to start need only this
+	compile("org.hibernate:hibernate-core:$hibernateVersion")
+
+	// xlitand: needed for some reason
+	compile("org.hibernate:hibernate-entitymanager:$hibernateVersion")
 		
+	// xlitand: JPA issues in Spring
+	compile("org.springframework:spring-orm:$springVersion")
 			
 	compile(files(genJaxb.classesDir).builtBy(genJaxb))
 	

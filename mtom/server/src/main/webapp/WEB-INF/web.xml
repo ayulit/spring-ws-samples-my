@@ -11,7 +11,7 @@
         </init-param>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>org.springframework.ws.samples.mtom.config.MtomServerConfiguration, org.springframework.ws.samples.mtom.aspects.AspectsConfig, org.springframework.ws.samples.mtom.config.DbConfig</param-value>
+            <param-value>org.springframework.ws.samples.mtom.config.MtomServerConfiguration, org.springframework.ws.samples.mtom.aspects.AspectsConfig, org.springframework.ws.samples.mtom.config.DataSourcesConfig, org.springframework.ws.samples.mtom.config.EntityManagerFactoriesConfig, org.springframework.ws.samples.mtom.config.TransactionManagersConfig</param-value>
         </init-param>
     </servlet>
 
@@ -20,10 +20,10 @@
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
     
-   <listener>
-	<listener-class>
+<!--    <listener>
+		<listener-class>
              org.springframework.ws.samples.mtom.listeners.AppListener
-        </listener-class>
-   </listener>    
+    	</listener-class>
+   </listener>   -->  
 
 </web-app>

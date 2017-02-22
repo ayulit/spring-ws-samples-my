@@ -12,7 +12,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 /** xlitand: JDBC connection config */
 @Configuration
-@PropertySource("classpath:jdbc.properties")
+@PropertySource("classpath:psql.properties")
 public class DbConfig {
 	
 	@Autowired
@@ -23,9 +23,9 @@ public class DbConfig {
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource ds = new DriverManagerDataSource();
-        ds.setUrl(environment.getRequiredProperty("jdbc.url"));
-        ds.setUsername(environment.getRequiredProperty("jdbc.username"));
-        ds.setPassword(environment.getRequiredProperty("jdbc.password"));
+        ds.setUrl(environment.getRequiredProperty("psql.url"));
+        ds.setUsername(environment.getRequiredProperty("psql.username"));
+        ds.setPassword(environment.getRequiredProperty("psql.password"));
         
         return ds;		
 	}

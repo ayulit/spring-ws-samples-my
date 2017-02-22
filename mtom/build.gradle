@@ -9,6 +9,7 @@ subprojects {
 
     repositories {
 		maven { url 'http://repo.spring.io/libs-release' }
+		maven { url 'http://xbib.org/repository' }
     }
 
     dependencies {

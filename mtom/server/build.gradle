@@ -79,7 +79,23 @@ dependencies {
 	// xlitand: JDBC interaction with database
 	compile("org.springframework:spring-jdbc:$springVersion")
 	
+	// xlitand: EmbeddedPostgreSQL by Yandex
+	compile("ru.yandex.qatools.embed:embedded-services:1.21")
+
+	// xlitand: To avoid ClassNotFoundException: Kernel32
+	//compile("io.fabric8:tooling-jclouds-all:1.2.0.Beta4")
+
+	// https://mvnrepository.com/artifact/net.java.dev.jna/jna
+	//compile group: 'net.java.dev.jna', name: 'jna', version: '4.3.0'
 	
+	// https://mvnrepository.com/artifact/net.java.dev.jna/jna-platform
+	//compile group: 'net.java.dev.jna', name: 'jna-platform', version: '4.1.0'
+	
+	
+	// xlitand: for using ServletContextListener, compileOnly in some reason...
+	compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+		
+			
 	compile(files(genJaxb.classesDir).builtBy(genJaxb))
 	
     // xlitand: 'org.apache.log4j.Logger' needs 'compile' in some reason... 

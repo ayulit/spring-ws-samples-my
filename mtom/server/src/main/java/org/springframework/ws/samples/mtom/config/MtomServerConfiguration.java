@@ -38,7 +38,7 @@ public class MtomServerConfiguration extends WsConfigurationSupport {
 		//return new StubImageRepository();
 		//return new XmlImageRepository();
 
-		// xlitand: here we go with DB
+
 		return new DbImageRepository();
 		
 	}
@@ -93,7 +93,7 @@ public class MtomServerConfiguration extends WsConfigurationSupport {
 		return new SimpleXsdSchema(new ClassPathResource("/schema.xsd"));
 	}
 	
-	// xlitand: bean for JAXBContext with class which we wanna serialize (as root element)
+
 	@Bean
 	public JAXBContext context() throws JAXBException {
 		return JAXBContext.newInstance(ImageXML.class);	

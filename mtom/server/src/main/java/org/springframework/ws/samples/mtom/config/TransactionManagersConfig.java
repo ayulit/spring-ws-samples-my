@@ -11,8 +11,8 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan("org.springframework.ws.samples.mtom.db") // searching @Component classes, particularly here @Service("jpaFruitServce")
-@EnableTransactionManagement                             // Enables @Transactional
+@ComponentScan("org.springframework.ws.samples.mtom.db")
+@EnableTransactionManagement
 public class TransactionManagersConfig {
 
 	@Autowired
@@ -21,8 +21,6 @@ public class TransactionManagersConfig {
 	@Autowired
 	private DataSource dataSource;
 
-	/** EntityManagerFactory needs TransactionManager for transactional access to data.
-        Luckily Spring has TransactionManager straight for JPA!  */
 	@Bean
 	public JpaTransactionManager transactionManager() {
 		

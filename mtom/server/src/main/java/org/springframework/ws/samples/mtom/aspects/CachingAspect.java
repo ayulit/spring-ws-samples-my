@@ -37,13 +37,13 @@ public class CachingAspect {
 		
 		validateName(name);
 		
-		// xlitand: creating reference to 'image' object for caching it
+
 		SoftReference<Image> imageRef = new SoftReference<Image>(image);		
 		ImageRepositoryEndpoint.imagesCache.put(name, imageRef);
 		
 		LOG.info("AROUND: Image stored in cache");
 				
-		jp.proceed(); // for bean's method run, so after caching we save image to repo
+		jp.proceed();
 	}
 	
 	@Around("readImageMethod(name)")
@@ -59,11 +59,11 @@ public class CachingAspect {
 			
 			LOG.info("AROUND: returning from cache Image " + name);
 			
-			// xlitand: temporary disabling read from cache to test read from DB
+
 			//return cashedImage;
 		}
 		
-		return jp.proceed(); // for bean's method run  
+		return jp.proceed();  
 	}
 	
 }

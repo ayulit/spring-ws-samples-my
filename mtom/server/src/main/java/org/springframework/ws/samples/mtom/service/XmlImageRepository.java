@@ -16,8 +16,7 @@ import org.springframework.ws.samples.mtom.config.ImageXML;
 public class XmlImageRepository implements ImageRepository {
 
 	private static final Logger LOG = Logger.getLogger(XmlImageRepository.class);
-	
-	// xlitand: @Autowired means auto-accordance with bean
+		
 	@Autowired
 	private JAXBContext jc;
 	
@@ -26,12 +25,8 @@ public class XmlImageRepository implements ImageRepository {
 				
 		LOG.info("Loading from XML image " + name);
 		
-		/* xlitand: unmarshaling config */
-		
-		// xlitand: for read
 		Unmarshaller um = jc.createUnmarshaller();
 		
-		// xlitand: file for xml reading
 		File file = getFile(name);	
         if(!file.exists()){
         	LOG.error("File " + name + " not found.");
@@ -48,17 +43,12 @@ public class XmlImageRepository implements ImageRepository {
 
 		LOG.info("Saving as XML image " + name + " [" + image.getWidth(null) + "x" + image.getHeight(null) + "]");
 		
-		/* xlitand: marshaling config */
-		
-		// xlitand: for write
 		Marshaller m = jc.createMarshaller();		
-		// xlitand: will be marshalled into formatted XML
+		
 		m.setProperty(m.JAXB_FORMATTED_OUTPUT, true); 
-		
-		/* xlitand: serialized object config */
+				
 		ImageXML imageXml = new ImageXML(name, image);
-		
-		// xlitand: creating file for xml saving
+				
 		File file = getFile(name);
 				
 		m.marshal(imageXml, file);

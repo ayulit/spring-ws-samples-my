@@ -39,34 +39,25 @@ public class ImageRepositoryEndpoint {
 
     private ImageRepository imageRepository;
 
-    private ObjectFactory objectFactory; // xlitand: needed for marshaling ?!
+    private ObjectFactory objectFactory;
 
-    // xlitand: HashMap for caching
     public static Map<String, SoftReference<java.awt.Image>> imagesCache = new HashMap<String, SoftReference<java.awt.Image>>();
-    
-    // xlitand: this constructor called from somewhere with 'imageRepository'
+
     public ImageRepositoryEndpoint(ImageRepository imageRepository) {
         Assert.notNull(imageRepository, "'imageRepository' must not be null");
-        
-        // xlitand: class parameters initialization
+
         this.imageRepository = imageRepository;
         this.objectFactory = new ObjectFactory();
     }
-    
-    // xlitand: this is Store Image Request from the client, I suppose
-    // xlitand: request comes as XML and it contains an image
-    // xlitand: annotations for marshaling ?!
+
     @PayloadRoot(localPart = "StoreImageRequest", namespace = "http://www.springframework.org/spring-ws/samples/mtom")
     @ResponsePayload
     public void store(@RequestPayload JAXBElement<Image> requestElement) throws IOException, JAXBException {
-        Image request = requestElement.getValue(); // xlitand: getting image from XML ?!
-        
-        // xlitand: storing image in repository
+        Image request = requestElement.getValue();
+
         imageRepository.storeImage(request.getName(), request.getImage());
     }
 
-    
-	// xlitand: method for object creation (from XML?!)
     @PayloadRoot(localPart = "LoadImageRequest", namespace = "http://www.springframework.org/spring-ws/samples/mtom")
     @ResponsePayload
     public JAXBElement<Image> load(@RequestPayload JAXBElement<String> requestElement) throws IOException, JAXBException {

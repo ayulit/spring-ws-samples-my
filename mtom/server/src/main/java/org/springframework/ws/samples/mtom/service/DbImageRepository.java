@@ -27,15 +27,10 @@ public class DbImageRepository implements ImageRepository {
 	public Image readImage(String name) throws IOException, JAXBException {
 
 		LOG.info("Reading image " + name + " from DB");		
-		
-		/* xlitand: Fetching from DB */
-
-		// xlitand: Getting row
+				
 		ImageORM imageRow = imageService.findByName(name);		
 		
 		byte[] imageInByte = imageRow.getImg();
-		
-		/* xlitand: Convert byte array back to Image*/
 		
 		InputStream in = new ByteArrayInputStream(imageInByte);
 		Image imageFromConvert = ImageIO.read(in);
@@ -46,16 +41,12 @@ public class DbImageRepository implements ImageRepository {
 	@Override
 	public void storeImage(String name, Image image) throws IOException, JAXBException {
 		
-		/* xlitand: Convert Image to byte array */
-		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();		
 		ImageIO.write((RenderedImage) image, 
 						StringUtils.getFilenameExtension(name), baos);
 		baos.flush();
 		byte[] imageInByte = baos.toByteArray();
 		
-		/* xlitand: Saving to DB */
-
 		ImageORM imageRow = new ImageORM();
 		imageRow.setName(name);
 		imageRow.setImg(imageInByte);

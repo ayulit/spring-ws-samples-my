@@ -16,22 +16,21 @@ public class EntityManagerFactoriesConfig {
 	@Autowired
 	private DataSource dataSource;
 
-	// xlitand: The most important bean of all this JPA config!
 	@Bean
 	public LocalContainerEntityManagerFactoryBean getEntityManagerFactory() {
 		
 		Properties jpaProperties = getJpaProperties();
 		
 		LocalContainerEntityManagerFactoryBean emf =  new LocalContainerEntityManagerFactoryBean();
-		emf.setDataSource(dataSource);                              // injecting bean of a DataSource
-		emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());   // Using Hibernate as ORM tool (persistence provider)
-		emf.setPackagesToScan(new String[] { "org.springframework.ws.samples.mtom.db" });  // Needed for find classes annotated by ORM annotations. We don't need to use persisitence.xml then (works from Spring 3.1)
+		emf.setDataSource(dataSource);
+		emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+		emf.setPackagesToScan(new String[] { "org.springframework.ws.samples.mtom.db" });
 		emf.setJpaProperties(jpaProperties);
 		
 		return emf;		
 	}
 
-	/** This gives properties for current persistence provider (Hibernate) */
+	
 	private Properties getJpaProperties() {
 		
 		Properties properties = new Properties();
@@ -40,12 +39,7 @@ public class EntityManagerFactoriesConfig {
 		properties.put("hibernate.max_fetch_depth", "3");
 		properties.put("hibernate.jdbc.fetch_size", "50");
 		properties.put("hibernate.jdbc.batch_size", "10");
-		properties.put("hibernate.show_sql", "true");
-		
-		// xlitand: 
-		// Drop and re-create the database schema on startup,
-		// -create: every time
-		// -update: if ONLY model changed!
+		properties.put("hibernate.show_sql", "true");	
 		properties.put("hibernate.hbm2ddl.auto", "create");
 		
 		return properties;

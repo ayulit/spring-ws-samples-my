@@ -66,48 +66,33 @@ dependencies {
 	compile("org.springframework.ws:spring-ws-core:$springWsVersion")
     compile("org.springframework:spring-context:$springVersion")
 	
-	// xlitand: using spring aop
+
 	compile("org.springframework:spring-aop:$springVersion")
 	
-	// xlitand: using aspectj
+
 	compile("org.aspectj:aspectjrt:1.8.10")
 	compile("org.aspectj:aspectjweaver:1.8.10")
 	compile("org.springframework:spring-aspects:$springVersion")
 	
-	// xlitand: PostgreSQL Drivers
+
 	compile("postgresql:postgresql:$postgresqlVersion")
 	
-	// xlitand: JDBC interaction with database
+
 	compile("org.springframework:spring-jdbc:$springVersion")
 	
-	// xlitand: EmbeddedPostgreSQL by Yandex
+
 	compile("ru.yandex.qatools.embed:embedded-services:1.21")
 
-	// xlitand: To avoid ClassNotFoundException: Kernel32
-	//compile("io.fabric8:tooling-jclouds-all:1.2.0.Beta4")
-
-	// https://mvnrepository.com/artifact/net.java.dev.jna/jna
-	//compile group: 'net.java.dev.jna', name: 'jna', version: '4.3.0'
-	
-	// https://mvnrepository.com/artifact/net.java.dev.jna/jna-platform
-	//compile group: 'net.java.dev.jna', name: 'jna-platform', version: '4.1.0'
-	
-	
-	// xlitand: for using ServletContextListener, compileOnly in some reason...
 	compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
 
-	// xlitand: Hibernate: to start need only this
 	compile("org.hibernate:hibernate-core:$hibernateVersion")
 
-	// xlitand: needed for some reason
 	compile("org.hibernate:hibernate-entitymanager:$hibernateVersion")
-		
-	// xlitand: JPA issues in Spring
+
 	compile("org.springframework:spring-orm:$springVersion")
 			
 	compile(files(genJaxb.classesDir).builtBy(genJaxb))
-	
-    // xlitand: 'org.apache.log4j.Logger' needs 'compile' in some reason... 
+
 	compile("log4j:log4j:1.2.16")
     runtime("wsdl4j:wsdl4j:1.6.1")
 

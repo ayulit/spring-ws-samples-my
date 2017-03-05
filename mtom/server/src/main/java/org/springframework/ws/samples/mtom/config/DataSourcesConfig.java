@@ -15,9 +15,7 @@ public class DataSourcesConfig {
 
 	@Autowired
 	private Environment environment;
-	
-	/* xlitand: dataSource is like generalised factory for connections
-	 * We will use Spring's realization of 'dataSource'*/
+
 	@Bean
 	public DataSource getDataSource() {
 		DriverManagerDataSource ds = new DriverManagerDataSource();

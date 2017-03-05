@@ -5,9 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/** xlitand:
- *  It's a model class - it is been mapped to DB's table.
- *  Object of this class will table's ROW ! */
 @Entity
 @Table(name="t_images")
 public class ImageORM {
@@ -15,7 +12,7 @@ public class ImageORM {
 	private String name;
 	private byte[] img;
 	
-	@Id // xlitand: for Primary Key
+	@Id
 	@Column(name="name")
 	public String getName() {
 		return name;

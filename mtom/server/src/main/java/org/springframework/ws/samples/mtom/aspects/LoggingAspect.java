@@ -20,7 +20,7 @@ public class LoggingAspect {
 	@Before("insideService()")
     public void before(JoinPoint joinPoint) {
     	
-		// xlitand: that's just aspect's code
+		
 		LOG.info("BEFORE : " + 
 				joinPoint.getTarget().getClass().getSimpleName() + 
 				" " +
